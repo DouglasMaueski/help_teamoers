@@ -7,4 +7,5 @@ Projeto React Native, quando clico no botão editar ele abre uma modal com os ca
 2. Ao clicar no botão editar, abre uma modal com os dados para edição.
 3. Mas quando clico em algum campo para editar, a modal fecha sozinho e o botão de editar fica travado.
 
+Obs.: não retornar nenhum erro. :(
 
