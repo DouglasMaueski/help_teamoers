@@ -10,14 +10,9 @@ import firestore from '@react-native-firebase/firestore';
 
 export default function ListDoctorHome({ data, handleDeleteDoctor }) {
 
-    const [modalVisibleSearch, setModalVisibleSearch] = useState(false)
-    const handlePressModalMain = () => setModalVisibleSearch(true)
-
-    const [modalVisibleWhats, setModalVisibleWhats] = useState(false)
-    const handlePressModalWhats = () => setModalVisibleWhats(true)
 
     const [modalVisibleEdit, setModalVisibleEdit] = useState(false)
-    const [editingDoctor, setEditingDoctor] = useState({ ...data });
+    const [editingDoctor, setEditingDoctor] = useState({ ...data })
 
 
     const handleEditDoctor = () => {
@@ -47,20 +42,6 @@ export default function ListDoctorHome({ data, handleDeleteDoctor }) {
             });
     };
 
-    const handleShare = async () => {
-        try {
-            const message = `Nome: ${data.nome}\nCRM: ${data.crm}\nÁrea de atuação: ${data.areaAtuacao}\nFaz TMO: ${data.fazTMO}\nFaz TMO sem sangue: ${data.aceitaSemSangue}\nMunicípio: ${data.municipio}\nContato: ${data.contato}\nE-mail: ${data.email}\nEndereço: ${data.endereco}\nObservações: ${data.observacoes}`;
-
-            await Share.open({
-                title: 'Compartilhar via',
-                message: message,
-                social: Share.Social.WHATSAPP,
-            });
-        } catch (error) {
-            console.warn('Erro ao compartilhar:', error);
-            Alert.alert('Compartilhamento não realizado!')
-        }
-    }
 
     const handleAlertDelete = () => {
         Alert.alert(
@@ -119,82 +100,7 @@ export default function ListDoctorHome({ data, handleDeleteDoctor }) {
                 </View>
             </View>
 
-            <Modal
-                animationType="slide"
-                visible={modalVisibleSearch}
-                onRequestClose={() => setModalVisibleSearch(false)}
-            >
-                <TouchableOpacity style={styles.modalIconsWhatsApp} onPress={() => handlePressModalWhats(data.id)}>
-                    <FontAwesome name="whatsapp" size={35} color="#14532d" />
-                </TouchableOpacity>
-
-                <Text style={styles.modalTitle}>Dados completos</Text>
-                <View style={styles.modalContainer}>
-                    <Text style={styles.modalNome}>{data.nome}</Text>
-                    <Text style={styles.modalText}>CRM: {data.crm}</Text>
-                    <Text style={styles.modalText}>Município: {data.municipio}</Text>
-                    <Text style={styles.modalAreaAtuacao}>{data.areaAtuacao}</Text>
-                    <Text style={styles.modalText}>Faz TMO: {data.fazTMO}</Text>
-                    <Text style={styles.modalText}>Faz TMO sem sangue: {data.aceitaSemSangue}</Text>
-                    <Text style={styles.modalText}>Contato: {data.contato}</Text>
-                    <Text style={styles.modalText}>email: {data.email}</Text>
-                    <Text style={styles.modalText}>Endereço: {data.endereco}</Text>
-                    <Text style={styles.modalTextObs}>Observações: {data.observacoes}</Text>
-                </View>
-
-                <TouchableOpacity
-                    style={styles.buttonModalFechar}
-                    onPress={() => setModalVisibleSearch(false)}
-                >
-                    <Text style={styles.buttonModalFecharText}>Fechar</Text>
-                </TouchableOpacity>
-            </Modal>
-
-
-            <Modal
-                animationType="fade"
-                visible={modalVisibleWhats}
-                onRequestClose={() => setModalVisibleWhats(false)}
-
-            >
-                <View style={styles.modalContainerMainWhats}>
-                    <View style={styles.modalContainerWhats}>
-
-                        <Text style={styles.modalTitleWhats}>Solicitar visita da COLIH-TMO</Text>
-                        <View style={styles.modalContentWhats}>
-                            <Text style={styles.modalNomeWhats}>{data.nome}</Text>
-                            <Text style={styles.modalTextWhats}>CRM: {data.crm}</Text>
-                            <Text style={styles.modalTextWhats}>Município: {data.municipio}</Text>
-                            <Text style={styles.modalTextWhats}>{data.areaAtuacao}</Text>
-                            <Text style={styles.modalTextWhats}>Faz TMO: {data.fazTMO}</Text>
-                            <Text style={styles.modalTextWhats}>Faz TMO sem sangue: {data.aceitaSemSangue}</Text>
-                            <Text style={styles.modalTextWhats}>Contato: {data.contato}</Text>
-                            <Text style={styles.modalTextWhats}>email: {data.email}</Text>
-                            <Text style={styles.modalTextWhats}>Endereço: {data.endereco}</Text>
-                            <Text style={styles.modalTextObsWhats}>Observações: {data.observacoes}</Text>
-                        </View>
-
-                        <View style={styles.containerbuttons}>
-                            <TouchableOpacity
-                                style={styles.buttonModalEnviarWhats}
-                                onPress={handleShare}
-                            >
-                                <Text style={styles.buttonModalFecharTextWhats}>Enviar</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                style={styles.buttonModalFecharWhats}
-                                onPress={() => setModalVisibleWhats(false)}
-                            >
-                                <Text style={styles.buttonModalFecharTextWhats}>Fechar</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-                </View>
-            </Modal>
-
-
+           
             <Modal
                 animationType="slide"
                 visible={modalVisibleEdit}
